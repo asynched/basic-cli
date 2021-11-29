@@ -21,10 +21,7 @@ export default class JSONPlaceholderExtension extends BaseExtension {
     const { endpoint, amountOfItems } = await this.#promptForEndpointAndAmount()
     const handler = this.#getHandlerFunction(amountOfItems)
 
-    const apiData = await LoadingMessage.load({
-      message: colors.bold('Fetching data...'),
-      promise: handler(endpoint),
-    })
+    const apiData = await handler(endpoint)
 
     const { saveToFile } = await this.#promptForSavingToFile()
 
@@ -140,7 +137,11 @@ export default class JSONPlaceholderExtension extends BaseExtension {
    * @returns { Promise<any[]> } Data from the API
    */
   async #getManyItems(endpoint) {
-    const { data } = await axios.get(`${this.BASE_URL}/${endpoint}`)
+    const { data } = await LoadingMessage.load({
+      message: colors.bold('Fetching data...'),
+      promise: axios.get(`${this.BASE_URL}/${endpoint}`),
+    })
+
     return data
   }
 
@@ -151,7 +152,11 @@ export default class JSONPlaceholderExtension extends BaseExtension {
    */
   async #getSingleItem(endpoint) {
     const { itemId } = await this.#promptForItemId()
-    const { data } = await axios.get(`${this.BASE_URL}/${endpoint}/${itemId}`)
+
+    const { data } = await LoadingMessage.load({
+      message: colors.bold('Fetching data...'),
+      promise: axios.get(`${this.BASE_URL}/${endpoint}/${itemId}`),
+    })
 
     return data
   }

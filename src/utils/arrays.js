@@ -7,3 +7,20 @@ export function unique(source) {
   const set = new Set(source)
   return Array.from(set)
 }
+
+/**
+ * @template T
+ * @param { T[] } source
+ * @returns { boolean }
+ */
+export function isEmpty(source) {
+  if (!source) {
+    return true
+  }
+
+  if (source.length === 0) {
+    return true
+  }
+
+  return false
+}

@@ -21,7 +21,8 @@ export class LoadingMessage {
       let counter = 0
 
       const interval = setInterval(() => {
-        const pattern = this.#loadingPattern[counter % this.#loadingPattern.length]
+        const pattern =
+          LoadingMessage.#loadingPattern[counter % LoadingMessage.#loadingPattern.length]
         process.stdout.write(`\r${colors.green(pattern)} ${message} `)
         counter++
       }, 50)

@@ -7,7 +7,7 @@ import util from 'util'
 export function prettyPrintJSON(json) {
   console.log(
     util.inspect(json, {
-      breakLength: null,
+      breakLength: Infinity,
       colors: true,
       compact: false,
       depth: Infinity,

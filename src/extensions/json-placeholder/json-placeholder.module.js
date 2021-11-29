@@ -1,6 +1,8 @@
 import JSONPlaceholderExtension from './json-placeholder.extension.js'
-import ExtensionModuleHandler from '../../lib/extension-module-handler.js'
+import ModuleFactory from '../../lib/module-factory.js'
 
-const JSONPlaceholder = ExtensionModuleHandler.makeInstance(JSONPlaceholderExtension)
+const JSONPlaceholder = ModuleFactory.makeModule({
+  extension: JSONPlaceholderExtension,
+})
 
 export default JSONPlaceholder
